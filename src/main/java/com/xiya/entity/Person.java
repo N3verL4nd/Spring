@@ -1,13 +1,43 @@
 package com.xiya.entity;
 
 /**
-* @file Person.java
-* @CopyRight (C) http://blog.csdn.net/x_iya
-* @Description
-* @author N3verL4nd
-* @email lgh1992314@qq.com
-* @date 2017/6/17
-*/
-public interface Person {
-    void sayHello();
+ * @author N3verL4nd
+ * @date 2020/11/7
+ */
+
+public class Person {
+    private String name;
+    private int age;
+
+    public Person() {
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

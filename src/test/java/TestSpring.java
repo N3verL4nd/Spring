@@ -1,4 +1,4 @@
-import com.xiya.service.PersonManager;
+import com.xiya.entity.Person;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,7 +11,7 @@ public class TestSpring {
     @Test
     public void test() {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        PersonManager peopleManager = context.getBean(PersonManager.class);
-        peopleManager.sayHello();
+        Person person = context.getBean(Person.class);
+        System.out.println(person);
     }
 }
