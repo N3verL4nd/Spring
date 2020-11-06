@@ -5,10 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--配置自动扫描的包-->
-    <context:component-scan base-package="com.xiya.entity">
-    </context:component-scan>
+    <context:component-scan base-package="com.xiya.test"/>
 
-    <bean id="person" class="com.xiya.entity.Person">
+    <bean id="person" class="com.xiya.test.Person">
         <property name="name" value="N3verL4nd"/>
         <property name="age" value="18"/>
     </bean>

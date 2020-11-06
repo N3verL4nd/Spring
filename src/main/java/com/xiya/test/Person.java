@@ -1,4 +1,4 @@
-package com.xiya.entity;
+package com.xiya.test;
 
 /**
  * @author N3verL4nd
