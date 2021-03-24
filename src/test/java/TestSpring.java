@@ -1,3 +1,4 @@
+import com.xiya.test.A;
 import com.xiya.test.Person;
 import com.xiya.test.PersonService;
 import org.junit.Before;
@@ -28,5 +29,10 @@ public class TestSpring {
     public void test2() {
         PersonService personService = context.getBean(PersonService.class);
         System.out.println(personService.getPerson());
+    }
+
+    @Test
+    public void test3() {
+        A a = context.getBean(A.class);
     }
 }
