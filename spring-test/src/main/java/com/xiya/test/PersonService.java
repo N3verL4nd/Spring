@@ -16,6 +16,11 @@ public class PersonService {
     @Autowired
     private Person person;
 
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     public Person getPerson() {
         log.info("PersonService getPerson starts.");
         return person;

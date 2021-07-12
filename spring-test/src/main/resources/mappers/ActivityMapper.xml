@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiya.test.dal.mapper.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.xiya.test.dal.entity.Activity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="action_type" jdbcType="INTEGER" property="actionType" />
+    <result column="mis" jdbcType="VARCHAR" property="mis" />
+    <result column="rule_info" jdbcType="VARCHAR" property="ruleInfo" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="mod_time" jdbcType="TIMESTAMP" property="modTime" />
+    <result column="data_source" jdbcType="INTEGER" property="dataSource" />
+    <result column="supplement_signinfo" jdbcType="VARCHAR" property="supplementSigninfo" />
+    <result column="master_version" jdbcType="BIGINT" property="masterVersion" />
+    <result column="slave_version" jdbcType="BIGINT" property="slaveVersion" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="city_ids" jdbcType="VARCHAR" property="cityIds" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, token, title, start_time, end_time, type, action_type, mis, rule_info, state, 
+    create_time, mod_time, data_source, supplement_signinfo, master_version, slave_version, 
+    creator, city_ids
+  </sql>
+  <select id="selectByExample" parameterType="com.xiya.test.dal.example.ActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="rows != null">
+      <if test="offset != null">
+        limit ${offset}, ${rows}
+      </if>
+      <if test="offset == null">
+        limit ${rows}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from activity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from activity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiya.test.dal.example.ActivityExample">
+    delete from activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xiya.test.dal.entity.Activity" useGeneratedKeys="true">
+    insert into activity (token, title, start_time, 
+      end_time, type, action_type, 
+      mis, rule_info, state, 
+      create_time, mod_time, data_source, 
+      supplement_signinfo, master_version, slave_version, 
+      creator, city_ids)
+    values (#{token,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{actionType,jdbcType=INTEGER}, 
+      #{mis,jdbcType=VARCHAR}, #{ruleInfo,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modTime,jdbcType=TIMESTAMP}, #{dataSource,jdbcType=INTEGER}, 
+      #{supplementSigninfo,jdbcType=VARCHAR}, #{masterVersion,jdbcType=BIGINT}, #{slaveVersion,jdbcType=BIGINT}, 
+      #{creator,jdbcType=VARCHAR}, #{cityIds,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xiya.test.dal.entity.Activity" useGeneratedKeys="true">
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="token != null">
+        token,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="actionType != null">
+        action_type,
+      </if>
+      <if test="mis != null">
+        mis,
+      </if>
+      <if test="ruleInfo != null">
+        rule_info,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modTime != null">
+        mod_time,
+      </if>
+      <if test="dataSource != null">
+        data_source,
+      </if>
+      <if test="supplementSigninfo != null">
+        supplement_signinfo,
+      </if>
+      <if test="masterVersion != null">
+        master_version,
+      </if>
+      <if test="slaveVersion != null">
+        slave_version,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="cityIds != null">
+        city_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="actionType != null">
+        #{actionType,jdbcType=INTEGER},
+      </if>
+      <if test="mis != null">
+        #{mis,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleInfo != null">
+        #{ruleInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modTime != null">
+        #{modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSource != null">
+        #{dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="supplementSigninfo != null">
+        #{supplementSigninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="masterVersion != null">
+        #{masterVersion,jdbcType=BIGINT},
+      </if>
+      <if test="slaveVersion != null">
+        #{slaveVersion,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="cityIds != null">
+        #{cityIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiya.test.dal.example.ActivityExample" resultType="java.lang.Long">
+    select count(*) from activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update activity
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.actionType != null">
+        action_type = #{record.actionType,jdbcType=INTEGER},
+      </if>
+      <if test="record.mis != null">
+        mis = #{record.mis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleInfo != null">
+        rule_info = #{record.ruleInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modTime != null">
+        mod_time = #{record.modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataSource != null">
+        data_source = #{record.dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplementSigninfo != null">
+        supplement_signinfo = #{record.supplementSigninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.masterVersion != null">
+        master_version = #{record.masterVersion,jdbcType=BIGINT},
+      </if>
+      <if test="record.slaveVersion != null">
+        slave_version = #{record.slaveVersion,jdbcType=BIGINT},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityIds != null">
+        city_ids = #{record.cityIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update activity
+    set id = #{record.id,jdbcType=BIGINT},
+      token = #{record.token,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=INTEGER},
+      action_type = #{record.actionType,jdbcType=INTEGER},
+      mis = #{record.mis,jdbcType=VARCHAR},
+      rule_info = #{record.ruleInfo,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      mod_time = #{record.modTime,jdbcType=TIMESTAMP},
+      data_source = #{record.dataSource,jdbcType=INTEGER},
+      supplement_signinfo = #{record.supplementSigninfo,jdbcType=VARCHAR},
+      master_version = #{record.masterVersion,jdbcType=BIGINT},
+      slave_version = #{record.slaveVersion,jdbcType=BIGINT},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      city_ids = #{record.cityIds,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiya.test.dal.entity.Activity">
+    update activity
+    <set>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="actionType != null">
+        action_type = #{actionType,jdbcType=INTEGER},
+      </if>
+      <if test="mis != null">
+        mis = #{mis,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleInfo != null">
+        rule_info = #{ruleInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modTime != null">
+        mod_time = #{modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSource != null">
+        data_source = #{dataSource,jdbcType=INTEGER},
+      </if>
+      <if test="supplementSigninfo != null">
+        supplement_signinfo = #{supplementSigninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="masterVersion != null">
+        master_version = #{masterVersion,jdbcType=BIGINT},
+      </if>
+      <if test="slaveVersion != null">
+        slave_version = #{slaveVersion,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="cityIds != null">
+        city_ids = #{cityIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiya.test.dal.entity.Activity">
+    update activity
+    set token = #{token,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      action_type = #{actionType,jdbcType=INTEGER},
+      mis = #{mis,jdbcType=VARCHAR},
+      rule_info = #{ruleInfo,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      mod_time = #{modTime,jdbcType=TIMESTAMP},
+      data_source = #{dataSource,jdbcType=INTEGER},
+      supplement_signinfo = #{supplementSigninfo,jdbcType=VARCHAR},
+      master_version = #{masterVersion,jdbcType=BIGINT},
+      slave_version = #{slaveVersion,jdbcType=BIGINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      city_ids = #{cityIds,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    insert into activity
+    (token, title, start_time, end_time, type, action_type, mis, rule_info, state, create_time, 
+      mod_time, data_source, supplement_signinfo, master_version, slave_version, creator, 
+      city_ids)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.token,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.startTime,jdbcType=TIMESTAMP}, 
+        #{item.endTime,jdbcType=TIMESTAMP}, #{item.type,jdbcType=INTEGER}, #{item.actionType,jdbcType=INTEGER}, 
+        #{item.mis,jdbcType=VARCHAR}, #{item.ruleInfo,jdbcType=VARCHAR}, #{item.state,jdbcType=TINYINT}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.modTime,jdbcType=TIMESTAMP}, #{item.dataSource,jdbcType=INTEGER}, 
+        #{item.supplementSigninfo,jdbcType=VARCHAR}, #{item.masterVersion,jdbcType=BIGINT}, 
+        #{item.slaveVersion,jdbcType=BIGINT}, #{item.creator,jdbcType=VARCHAR}, #{item.cityIds,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+</mapper>
