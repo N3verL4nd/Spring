@@ -12,6 +12,7 @@
         <property name="age" value="18"/>
     </bean>
 
+
     <bean id="a" class="com.xiya.test.cricle.A">
         <property name="b" ref="b"/>
     </bean>
